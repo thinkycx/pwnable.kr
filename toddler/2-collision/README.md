@@ -11,6 +11,7 @@ ssh col@pwnable.kr -p2222 (pw:guest)
 ## WRITEUP
 download:
 `scp -P 2222 -p  col@pwnable.kr:/home/col/* ./`
+
 程序获取length为20的argv[1]，使用check_password函数将argv[1]运算后，和hashcode (int)0x21DD09ECh比较，如果相等，拿到拿到flag。check_password中，将a1按照DWORD 4byte取5个signed int累加返回。因此，构造字符串argv[1]为五个signed int即可。hex(0x21dd09ec - 0x01010101*4)='0x1dd905e8'。
 
 EXP: 
@@ -72,5 +73,5 @@ IDA disassemable:
 ```
 
 ## TIPS
-argv作为二级指针传递给程序，保存了运行的参数信息。printf("usage : %s [passcode]\n", *argv);会输出argv[0]，直接运行程序argv[0]为./bof，gdb调试argv[0]包含了绝对路径/home/col/col。
+argv作为二级指针传递给程序，保存了运行的参数信息。printf("usage : %s [passcode]\n", *argv);会输出argv[0]，直接运行程序argv[0]为./col，gdb调试argv[0]包含了绝对路径/home/col/col。
 
