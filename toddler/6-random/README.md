@@ -8,7 +8,10 @@ ssh random@pwnable.kr -p2222 (pw:guest)
 ```
 
 ## WRITEUP
-
+download:  
+```
+scp -P 2222 -p  random@pwnable.kr:/home/random/* ./
+```
 程序输入用scanf %d 读取一个signed int和rand()异或，如果结果为0xdeadbeef进入system流程。由于rand()调用前没有调用srand()，因此产生的结果可以认为是不变的。   
 A ^ B = C ->  A ^ C = B -> B ^ C = A ，任意两个变量异或的值等于第三个值。gdb本地调试，断点设置在rand()后，b *0x400606，可知rand的结果为0x6b8b4567。
 
@@ -55,12 +58,12 @@ int __cdecl main(int argc, const char **argv, const char **envp)
     int rand_r(unsigned int *seedp);
     void srand(unsigned int seed);
 ```
-rand() returns a pseudo-random integer. Without srand(),the return value is 1804289383.
-srand() can change the seed which will effect rand(). # default srand(1)
-rand_r()'s seedp argument is used to store state between calls.  
+rand() returns a pseudo-random integer. Without srand(),the return value is 1804289383.  
+srand() can change the seed which will effect rand(). # default srand(1)  
+rand_r()'s seedp argument is used to store state between calls.    
 
-See more at: http://man7.org/linux/man-pages/man3/rand.3.html and glibc also.
-Example:
+See more at: http://man7.org/linux/man-pages/man3/rand.3.html and glibc also.  
+Example:  
 ```c
 #include <stdio.h>
 #include <stdlib.h>
