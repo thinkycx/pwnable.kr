@@ -84,6 +84,8 @@ int login()
 .text:080485B1                 mov     [esp], eax
 .text:080485B4                 call    ___isoc99_scanf
 ```
+## flag
+Sorry mom.. I got confused about scanf usage :(
 
 ## TIPS
 scanf 会将format和输入的字符进行匹配，如果不匹配，格式化操作不会生效。例如：scanf("input%d",&a);输入为input123，123才会写入a中。
