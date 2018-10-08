@@ -53,3 +53,5 @@ IDA disassemble：
 .data:00000000006C2070                                         ; DATA XREF: main+20↑r
 .data:00000000006C2070                                         ; "UPX...? sounds like a delivery service "...
 ```
+## flag
+UPX...? sounds like a delivery service :)
