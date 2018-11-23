@@ -18,7 +18,7 @@ ropme函数输入abcdefg的值，就可以调用相应的打印函数。gets函�
 
 注意有几个坑点：
 
-- gets函数遇到a newline character比如\x00 \x0a就会截断，ropme函数起始地址是0x080A0009，不能直接跳转到ropme函数中执行代码。可以直接跳到ABCDEFG函数里面获取abcdefg的值。
+- gets函数遇到a newline character比如\x0a就会截断(遇到\x00 \t不会截断，gets可以读入)，ropme函数起始地址是0x080A0009，不能直接跳转到ropme函数中执行代码。可以直接跳到ABCDEFG函数里面获取abcdefg的值。
 - atoi函数将int转化为字符串，如果数字超过int范围转化失败返回-1。
 
 此外，由于0xa不能输入，find查看了stack中是有0x080a的值的，如果栈溢出溢出低位几个字节为打印flag的低位，再rop到该处应该也可以直接读flag。
